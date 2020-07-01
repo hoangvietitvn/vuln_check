@@ -1,0 +1,5 @@
+---
+- name: Check All Running Services
+  shell: systemctl | grep running
+  register: systemctl01
+- local_action: "copy content={{ systemctl01.stdout }} dest=/home/ec2-user/{{ansible_host}}_service01.txt user=ec2-user group=ec2-user mode='0644'"

@@ -1,0 +1,15 @@
+---
+# tasks file for vuln_check
+- import_tasks: permission_check01.yml
+- import_tasks: check_locale.yml
+- import_tasks: check_service.yml
+- import_tasks: check_proc.yml
+- import_tasks: check_update.yml
+- import_tasks: update.yml
+- import_tasks: check_locale_afterupdate.yml
+- import_tasks: check_service_afterupdate.yml
+- import_tasks: check_proc_afterupdate.yml
+- import_tasks: check_needsrestarting.yml
+- import_tasks: reboot.yml
+- import_tasks: check_needsrestarting_afterreboot.yml
+- import_tasks: permission_check_afterreboot.yml

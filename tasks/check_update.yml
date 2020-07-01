@@ -1,0 +1,10 @@
+---
+- name: Check packages before updating
+  shell: yum check-update
+  register: yum_check
+  #ignore_errors: yes
+#- name: Show Info Packages Before Updating
+#  debug:
+#        var: yum_check.results
+- local_action: "copy content={{ yum_check.stdout }} dest=/home/ec2-user/{{ansible_host}}_check-update.txt user=ec2-user group=ec2-user mode='0644'"
+  

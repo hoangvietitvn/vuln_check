@@ -1,0 +1,43 @@
+---
+          - name: Get stat of directory /var/www
+            shell: ls -al /var/ | grep www
+            register: var_www02
+            ignore_errors: yes
+          - name: Get stat of file /etc/php-fpm.d/www.conf
+            shell: ls -al /etc/php-fpm.d/ | grep www.conf
+            register: www_config02
+            ignore_errors: yes
+          - name: Get stat of directory /var/log/httpd
+            shell: ls -al /var/log | grep httpd
+            register: var_log_httpd02
+            ignore_errors: yes
+          - name: Get stat of file config /etc/ssh/sshd_config
+            shell: ls -al /etc/ssh | grep sshd_config
+            register: etc_sshd02
+            ignore_errors: yes 
+          - name: Get stat of directory /usr/share/nginx/html
+            shell: ls -al /usr/share/nginx | grep html
+            register: nginx_html02
+            ignore_errors: yes
+          - name: Get stat of file /run/php-fpm/www.sock
+            shell: ls -al /run/php-fpm/ | grep www.sock
+            register: www_sock02
+            ignore_errors: yes
+          - name: Get stat of directory /var/lib
+            shell: ls -al /var/ | grep lib
+            register: var_lib02
+            ignore_errors: yes
+          - name: Get stat of directory /var/lib/mysql
+            shell: ls -al /var/lib | grep mysql
+            register: var_lib_mysql02
+            ignore_errors: yes
+          - local_action: 
+              module: copy
+              content: "{{ (var_www02.stdout_lines + www_config02.stdout_lines + var_log_httpd02.stdout_lines + etc_sshd02.stdout_lines + nginx_html02.stdout_lines + www_sock02.stdout_lines + var_lib02.stdout_lines + var_lib_mysql02.stdout_lines ) | join('\n') }}"
+              dest: /home/ec2-user/{{ ansible_host }}_check-permission02.txt
+              owner: ec2-user
+              group: ec2-user
+              mode: '0644'
+            
+            
+            

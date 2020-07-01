@@ -1,0 +1,8 @@
+---
+- name: Check Process After Update
+  shell: ps -eo command --sort comm | grep -v COMMAND
+  register: checkproc02
+#- name: Show Info Process After Update
+#  debug:
+#        var: checkproc02.stdout_lines
+- local_action: "copy content={{ checkproc02.stdout }} dest=/home/ec2-user/{{ansible_host}}_proc02.txt user=ec2-user group=ec2-user mode='0644' "

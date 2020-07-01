@@ -1,0 +1,30 @@
+---     
+- name: Confirm REBOOT
+  pause:
+    prompt: "yes or no"
+  register: reboot01
+- name: Set fact
+  set_fact:
+        reboot01: "{{ reboot01.user_input }}"
+  run_once: yes
+- name: REBOOTING
+  reboot:
+      reboot_timeout: 3600   
+  when: reboot01 | bool         
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+#- reboot:
+#      reboot_timeout: 3600

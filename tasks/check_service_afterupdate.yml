@@ -1,0 +1,8 @@
+---
+- name: Check All Running Services After Update
+  shell: systemctl | grep running
+  register: systemctl02
+#- name: Show Info Running Services After Update
+#  debug:
+#        var: systemctl01.stdout_lines
+- local_action: "copy content={{ systemctl02.stdout }} dest=/home/ec2-user/{{ansible_host}}_service02.txt user=ec2-user group=ec2-user mode='0644'"
